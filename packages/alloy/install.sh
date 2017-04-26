@@ -22,10 +22,18 @@ apt-get -y update
 apt-get -y install oracle-java6-installer
 
 #Download Alloy
-wget http://alloy.mit.edu/alloy/downloads/alloy4.2.jar
+wget http://alloy.mit.edu/alloy/downloads/alloy4.2.jar --output-document=alloy.jar
 
 #Create soft link to  Alloy
-from=/scripts/packages/alloy
+mkdir /opt/alloy
+mv alloy.jar /opt/alloy
+
+touch /opt/alloy/alloy
+echo  "#!/bin/bash" >> /opt/alloy/alloy
+echo "java -jar /opt/alloy/alloy.jar" >> /opt/alloy/alloy
+chmod +x /opt/alloy/alloy
+
+from=/opt/alloy/alloy
 to=/usr/local/bin
 ln -s $from  $to
 
