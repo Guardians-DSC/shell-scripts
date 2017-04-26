@@ -1,0 +1,36 @@
+#################################################################################################
+#								       															                                            #
+# Lista de pacotes que serão instalados															                            #
+# para excluir a instalação de algum pacote da lista, basta comenta-lo 	       					        #
+# Autores: Victor Hugo - victorhundo@gmail.com                                                  #
+# Janeiro de 2017											       								                                    #
+#								       															                                            #
+#################################################################################################
+
+#Pacotes:
+
+#apache
+#Atom
+#curl
+#easyinstall
+#Eclipse Neon
+#firefox
+#intellij
+#java8
+#less
+#libcurl4-openssl-dev
+#maven
+#meld
+#node
+#openssh
+#openvpn
+#oracle
+#python2
+#quota
+#slack
+#spotify
+#virtualbox
+#wget
+#yakuake
+
+#END

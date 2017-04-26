@@ -1,0 +1,13 @@
+#!/bin/sh
+case "$1" in
+start)
+    mkdir /var/lock/subsys 2>/dev/null
+    touch /var/lock/subsys/listener
+    rm /dev/shm 2>/dev/null
+    mkdir /dev/shm 2>/dev/null
+*)
+    echo error
+    exit 1
+    ;;
+
+esac 

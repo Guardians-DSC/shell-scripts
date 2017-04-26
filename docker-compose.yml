@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+    ubuntu:
+        build: docker/ubuntu
+        image: tst-ubuntu:latest
+        volumes:
+            - ./:/scripts
+        hostname: tst-ubuntu
+        stdin_open: true
+        tty: true
