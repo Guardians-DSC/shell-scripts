@@ -2,7 +2,7 @@
 
 #################################################################################################
 #                                                                                                                                                                                       #
-# Script de instala√√o Python-setuptools
+# Script de instalaÁ„o Python-setuptools
                                                      # #
 # Autores: Ana Godoy - godoyisadora@gmail.com      #
 # Abril de 2017                                                                                                                                                       #

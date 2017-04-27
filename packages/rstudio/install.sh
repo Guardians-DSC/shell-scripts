@@ -2,7 +2,7 @@
 #!/bin/bash
 #################################################################################################
 #                                                                                                                                                                                       #
-# Script de instalaço RStudio                                                           
+# Script de instalação RStudio                                                           
                                                      # #
 # Autores: Ana Godoy - godoyisadora@gmail.com      #
 # Abril de 2017                                                                                                                                                       #
@@ -10,7 +10,7 @@
 #################################################################################################
 
 #Update
-apt-get update
+apt-get -y update
 
 #Install gdebi
 apt-get -y install gdebi-core

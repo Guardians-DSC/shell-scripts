@@ -2,7 +2,7 @@
 
 #################################################################################################
 #                                                                                                                                                                                       #
-# Script de instalaço  Python 2                                                                                                                        # #
+# Script de instalação  Python 2                                                                                                                        # #
 # Autores: Ana Godoy - godoyisadora@gmail.com      #
 # Abril de 2017                                                                                                                                                       #
 #                                                                                                                                                                                       #

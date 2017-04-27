@@ -2,7 +2,7 @@
 
 #################################################################################################
 #                                                                                                                                                                                       #
-# Script de instala��o Pytpip
+# Script de instalação pip
                                                      # #
 # Autores: Ana Godoy - godoyisadora@gmail.com      #
 # Abril de 2017                                                                                                                                                       #

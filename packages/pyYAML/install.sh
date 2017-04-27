@@ -2,7 +2,7 @@
 
 #################################################################################################
 #                                                                                                                                                                                       #
-# Script de instalaï¿½ïPyYAML
+# Script de instalação PyYAML
                                                      # #
 # Autores: Ana Godoy - godoyisadora@gmail.com      #
 # Abril de 2017                                                                                                                                                       #

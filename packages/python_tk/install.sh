@@ -2,7 +2,7 @@
 
 #################################################################################################
 #                                                                                                                                                                                       #
-# Script de instala√√o Python-tk
+# Script de instalaÁ„o Python-tk
                                                      # #
 # Autores: Ana Godoy - godoyisadora@gmail.com      #
 # Abril de 2017                                                                                                                                                       #
