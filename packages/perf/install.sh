@@ -13,11 +13,15 @@ apt-get -y update
 
 #Install
 apt-get -y install systemtap
-sudo stap -e 'probe begin { printf("Hello, World!\n"); exit() }'
-apt-get  install linux-tools-common
-#apt-get -y install linux-tools-moby
-#apt-get -y install linux-cloud-tools-moby 
-#apt-get -y install linux-tools-4.9.13-moby
-#apt-get -y install linux-cloud-tools-4.9.13-moby
+apt-get -y install linux-tools-common
+perf 
 
+apt-get -y install linux-cloud-tools-4.9.13-moby
+
+#Install C compiler
+
+apt-get -y install gcc g++
+
+#Compiling the program necessary for the perf
+make cpu_burn
 
