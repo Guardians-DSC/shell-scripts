@@ -9,7 +9,7 @@
 #########################################################################
 
 #Atualiza e instala dependencias
-apt-get update && apt-get install $(cat depedences) && rm -rf /var/lib/apt/lists/*
+apt-get -y update && apt-get install $(cat depedences) && rm -rf /var/lib/apt/lists/*
 
 #Faz download do intellij
 wget https://download.jetbrains.com/idea/ideaIU-2016.3.3.tar.gz
