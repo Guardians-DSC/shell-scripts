@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Alloy
+Comment=IDE para linguagem alloy.
+Exec=/opt/alloy/alloy
+Icon=/opt/alloy/alloy.gif
+Terminal=false
+Type=Application
+Categories=Utility;Development;
