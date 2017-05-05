@@ -31,11 +31,12 @@ rm -rf /var/cache/oracle-jdk8-installer  && \
 apt-get clean  && \
 rm -rf /var/lib/apt/lists/*
 
+
 #Install Android Studio
 
 apt-get -y install software-properties-common python-software-properties
 apt-get -y  update
-yes '' | add-apt-repository ppa:paolorotolo/android-studio
+yes '' | add-apt-repository ppa:maarten-fonville/android-studio
 apt-get -y update
 apt-get -y install --allow-unauthenticated android-studio
 
