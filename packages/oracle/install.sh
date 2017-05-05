@@ -1,10 +1,10 @@
 #/bin/bash
 #################################################################################################
-#								       															#
-# Script de instalação do Oracle Database Express Edition 11g 	       							#
-# Autores: Victor Hugo - victorhundo@gmail.comaa                                                #
-# Janeiro de 2017											       								#
-#								       															#
+#								       															                                             #
+# Script de instalação do Oracle Database Express Edition 11g 	       							             #
+# Autores: Victor Hugo - victorhundo@gmail.comaa                                                 #
+# Janeiro de 2017											       								                                     #
+#								       															                                             #
 #################################################################################################
 
 USER="oracle"
@@ -12,7 +12,7 @@ PASSWORD="secret"
 ORACLE_HTTP_PORT="9000"
 ORACLE_LISTENER_PORT="1521"
 ORACLE_PASSOWRD="secretdb"
-ORACLE_DEB="http://oracle-xe_11.2.0-2_amd64.deb"
+ORACLE_DEB="http://psi.splab.ufcg.edu.br/oracle-xe_11.2.0-2_amd64.deb"
 
 #instalando depedencias
 apt-get update && apt-get install -y $(cat depedences) && rm -rf /var/lib/apt/lists/*
