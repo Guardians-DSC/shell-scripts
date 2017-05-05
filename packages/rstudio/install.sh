@@ -16,7 +16,7 @@ apt-get -y update
 apt-get -y install gdebi-core
 
 #Download RStudio
-wget https://download2.rstudio.org/rstudio-server-1.0.143-amd64.deb
+wget https://download1.rstudio.org/rstudio-1.0.143-amd64.deb
 
 #Install RStudio
-gdebi rstudio-server-1.0.143-amd64.deb
+gdebi rstudio-1.0.143-amd64.deb
