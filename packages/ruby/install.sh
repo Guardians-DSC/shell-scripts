@@ -10,4 +10,4 @@
 apt-get update && apt-get install -y $(cat dependencies) && rm -rf /var/lib/apt/lists/*
 
 ### install ruby
-apt-get install ruby -y
+apt-get install ruby-full -y

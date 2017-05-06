@@ -10,4 +10,4 @@
 apt-get update
 
 ### gem rails
-apt-get install ruby-rails
+apt-get install ruby-rails -y
