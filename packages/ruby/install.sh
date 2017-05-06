@@ -6,8 +6,8 @@
 #                                                       #
 #########################################################
 
-### update repositories and install package
-apt-get update && apt-get install -y $(cat dependencies) && rm -rf /var/lib/apt/lists/*
+### apt update
+apt-get update
 
 ### install ruby
 apt-get install ruby-full -y
