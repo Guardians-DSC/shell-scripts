@@ -1,5 +1,7 @@
 #!/bin/bash
 
-wget https://github.com/adobe/brackets/releases/download/release-1.9/Brackets.Release.1.9.64-bit.deb --output-document=brackets.deb
-yes | dpkg -i brackets.deb
-rm brackets.deb
+# Install add-apt-repository
+apt-get update && apt-get install -y software-properties-common
+add-apt-repository ppa:webupd8team/brackets
+
+apt-get update && apt-get install -y brackets

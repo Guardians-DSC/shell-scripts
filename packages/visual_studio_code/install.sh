@@ -15,4 +15,4 @@
 yes | apt-get update
 yes | dpkg -i code.deb; yes | apt-get -f install; yes| dpkg -i code.deb
 
-rm code.deb
+# rm code.deb
