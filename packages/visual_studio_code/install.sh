@@ -2,21 +2,17 @@
 
 #################################################################################################
 #                                                                                                                                                                                       #
-# Script de instalaï¿½ï   Visual Studio Code                                                  
+# Script de instalaï¿½ï¿½   Visual Studio Code
                                                      # #
 # Autores: Ana Godoy - godoyisadora@gmail.com      #
 # Abril de 2017                                                                                                                                                       #
 #                                                                                                                                                                                       #
 #################################################################################################
 
-#Update
-apt-get -y update
+# wget https://go.microsoft.com/fwlink/?LinkID=760868
+# mv index.html?LinkID=760868 code.deb
 
-#Install Visual Studio Code
-apt-get -y install software-properties-common python-software-properties
-apt-get -y  update
-yes '' | add-apt-repository ppa:ubuntu-desktop/ubuntu-make
-apt-get -y update
-apt-get -y install ubuntu-make
+yes | apt-get update
+yes | dpkg -i code.deb; yes | apt-get -f install; yes| dpkg -i code.deb
 
-umake web visual-studio-code
+# rm code.deb
