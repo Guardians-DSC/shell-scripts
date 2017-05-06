@@ -10,4 +10,4 @@
 apt-get update
 
 ### install vlc
-apt-get install vlc browser-plugin-vlc
+apt-get install vlc browser-plugin-vlc -y
