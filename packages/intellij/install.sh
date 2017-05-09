@@ -9,10 +9,10 @@
 #########################################################################
 
 #Atualiza e instala dependencias
-apt-get -y update && apt-get install $(cat depedences) && rm -rf /var/lib/apt/lists/*
+apt-get -y update && apt-get install $(cat depedences) -y && rm -rf /var/lib/apt/lists/*
 
 #Faz download do intellij
-#wget https://download.jetbrains.com/idea/ideaIU-2017.1.2.tar.gz --output-document=intellij.tar.gz
+wget https://download.jetbrains.com/idea/ideaIU-2017.1.2.tar.gz --output-document=intellij.tar.gz
 
 #Descompacta intellij para a pasta temporaria
 mkdir ./intellij
@@ -26,7 +26,7 @@ mv ./intellij/ij /opt/intellij
 chmod +x /opt/intellij/bin/idea.sh
 
 ### creating soft link
-from=/opt/intellij/bin/idea
+from=/opt/intellij/bin/idea.sh
 to=/usr/local/bin
 ln -s $from $to
 
