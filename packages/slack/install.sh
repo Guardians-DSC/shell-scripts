@@ -19,3 +19,5 @@ dpkg -i slack-desktop-2.4.2-amd64.deb
 
 #Corrige problemas (caso haja) da instalação
 apt-get -f install
+
+rm slack-desktop-2.4.2-amd64.deb

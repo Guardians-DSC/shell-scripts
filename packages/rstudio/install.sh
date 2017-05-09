@@ -2,7 +2,7 @@
 #!/bin/bash
 #################################################################################################
 #                                                                                                                                                                                       #
-# Script de instalação RStudio                                                           
+# Script de instalação RStudio
                                                      # #
 # Autores: Ana Godoy - godoyisadora@gmail.com      #
 # Abril de 2017                                                                                                                                                       #
@@ -20,3 +20,5 @@ wget https://download1.rstudio.org/rstudio-1.0.143-amd64.deb
 
 #Install RStudio
 gdebi rstudio-1.0.143-amd64.deb
+
+rm rstudio-1.0.143-amd64.deb

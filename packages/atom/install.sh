@@ -16,5 +16,3 @@ apt-get update
 
 #Instala o programa
 apt-get install atom
-
-

@@ -38,5 +38,7 @@ to=/usr/local/bin
 ln -s $from  $to
 
 #Create Desktop Icon
-cp ./desktop-icon/alloy.gif /opt/alloy/
-cp ./desktop-icon/alloy.desktop /usr/share/applications/
+cp ./desktop-icon/webstorm.desktop /usr/share/applications/
+
+### remove downloaded files
+rm alloy.jar

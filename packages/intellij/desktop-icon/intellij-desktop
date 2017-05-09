@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=IntelliJ
+Comment=IDE para linguagem JAVA.
+Exec=/opt/intellij/
+Icon=/opt/intellij/
+Terminal=false
+Type=Application
+Categories=Utility;Development;

@@ -12,16 +12,28 @@
 apt-get -y update && apt-get install $(cat depedences) && rm -rf /var/lib/apt/lists/*
 
 #Faz download do intellij
-wget https://download.jetbrains.com/idea/ideaIU-2017.1.2.tar.gz
+wget https://download.jetbrains.com/idea/ideaIU-2017.1.2.tar.gz --output-document=intellij.tar.gz
 
-#Descompacta intellij para a pasta /opt/
-tar -xf  ideaIU-2017.1.2.tar.gz -C /opt/
+#Descompacta intellij para a pasta temporaria
+tar -xf  intellij.tar.gz -C ./intellij/
 
-#Entra na pasta bin dentro de /opt/
-cd /opt/idea-IU-171.4249.39/bin
+### moving package to /opt
+mv ./intellij/* intellij/ij
+mv ./intellij/ij /opt/intellij
 
-#Executa o script de instalação do intellij
-./idea.sh
+### executa instalavel
+sh /opt/intellij/bin/idea.sh
 
 #Apaga o arquivo de download
-rm -rfv ideaIU-2017.1.2.tar.gz
+rm -rfv intellij.tar.gz
+
+### grant access to all
+chmod +x /opt/intellij/bin/.sh
+
+### creating soft link
+from=/opt/intellij/bin/intellij
+to=/usr/local/bin
+ln -s $from $to
+
+#Create Desktop Icon
+cp ./desktop-icon/intellij.desktop /usr/share/applications/
