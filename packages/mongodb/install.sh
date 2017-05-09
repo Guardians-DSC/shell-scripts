@@ -17,4 +17,8 @@ echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb
 # atualiza os repositorios e instala o mongodb
 apt-get -y update && apt-get install -y mongodb-org
 
+# adiciona arquivos de configuração
 cat ./config >> /etc/systemd/system/mongodb.service
+
+# abilita o serviço no sistema
+systemctl enable mongodb
