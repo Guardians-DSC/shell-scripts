@@ -9,10 +9,10 @@
 #########################################################################
 
 #atualiza
-apt-get update
+apt-get update -y
 
 #instala o repositorio
-add-apt-repository ppa:damien-moore/codeblocks-stable
+yes " " | add-apt-repository ppa:damien-moore/codeblocks-stable
 
 #atualiza e instala o codeblocks
-apt-get update && apt-get install codeblocks
+apt-get update -y && apt-get install -y codeblocks
