@@ -88,11 +88,12 @@ if [ "$usuario_ok" = "true" ]; then
 	path_local="/mnt/montagem-emails"
 	file_local="/mnt/montagem-emails/usuarios_cadastrados.csv"
 	login=$(whoami)
-	password=$(dialog --stdout --no-cancel --ok-label "Ok" --title "Senha" --passwordbox "" 0 0)
+	password=$(dialog --stdout --no-cancel --ok-label "Ok" --title "Senha" --passwordbox "Poderia inserir a senha de seu usuario-LCC?" 0 0)
 
 	echo $password | sshfs -p 23456 samuelndm@chopper.lcc.ufcg.edu.br:$path_server $path_local -o password_stdin
 	echo $login,$email >> $file_local
 	
+	password=""
 	fusermount -u $path_local
 	rm -r $path_local
 fi
