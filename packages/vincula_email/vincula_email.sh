@@ -5,9 +5,7 @@ valida_email() {
 	regex=^[a-z.]+@"ccc.ufcg.edu.br"
 	email=$1
 	
-	if = [ -z $email ]; then
-		echo "not ok"
-	elif [[ $email =~ $regex ]]; then  
+	if [[ $email =~ $regex ]]; then  
         	echo "ok"
 	else
         	echo "not ok"
@@ -49,7 +47,7 @@ create_mount_point(){
 	mount_point="/mnt/montagem-emails"
 	if [ -e "$mount_point" ]; then
 		fusermount -u $mount_point
-		rm rmdir $mount_point
+		rm -r $mount_point
 	else
 		mkdir $mount_point
 	fi
@@ -62,19 +60,19 @@ while true; do
                 email=$(input_email "Digite seu email:")
                 email_valido=$(valida_email $email)
 		
-		[ $? -eq 255 ] && exit
+#		[ $? -eq 255 ] && exit
 
 
                 if [ "$email_valido" = "ok" ]; then
                         break
                 else
-                        $(msg_box "Email invalido -- @ccc.ufcg.edu.br -- requerido")
+                        msg_box "Email invalido -- @ccc.ufcg.edu.br -- requerido"
                 fi
 
         done
 
 	email_confirm=$(input_email "Digite novamente seu email:")
-	[ $? -eq 255 ] && exit 
+#	[ $? -eq 255 ] && exit 
 		
 	if [ "$email" = "$email_confirm" ]; then
 		usuario_ok="true"
@@ -83,7 +81,6 @@ while true; do
 		msg_box "Os emails informados nao sao identicos, digite novamente"
 	fi
 done
-msg_box "Obrigado :)" && clear
 
 if [ "$usuario_ok" = "true" ]; then
 	create_mount_point
@@ -97,5 +94,7 @@ if [ "$usuario_ok" = "true" ]; then
 	echo $login,$email >> $file_local
 	
 	fusermount -u $path_local
-	rmdir $path_local
-fi	
+	rm -r $path_local
+fi
+msg_box "Obrigado :)" && clear
+exit 1
