@@ -74,14 +74,16 @@ done
 
 while true; do
 	password=$(dialog --stdout --no-cancel --ok-label "Ok" --title "Senha" --passwordbox "Poderia inserir a senha de seu usuario-LCC?" 0 0)
-	
-	sshpass -p $password ssh -p 23456 samuelndm@chopper.lcc.ufcg.edu.br exit 2>log
-	permission_denied=$(cat log | grep "denied")
+	login=$(whoami)
+	path_log="/opt/vincula_email/log"
+	rm $path_log
+	sshpass -p $password ssh -p 23456 $login@chopper.lcc.ufcg.edu.br exit 2>$path_log
+	permission_denied=$(cat $path_log | grep "denied")
 	
 	if [ -n "$permission_denied" ]; then
 		msg_box "Ops, senha incorreta! :("
 	else
-		rm log
+		rm $path_log
 		break
 	fi
 done
@@ -92,9 +94,8 @@ if [ "$usuario_ok" = "true" ]; then
 	path_server="/opt/emails_cadastrados"
 	path_local="/mnt/montagem-emails"
 	file_local="/mnt/montagem-emails/usuarios_cadastrados.csv"
-	login=$(whoami)
 	
-	echo $password | sshfs -p 23456 samuelndm@chopper.lcc.ufcg.edu.br:$path_server $path_local -o password_stdin
+	echo $password | sshfs -p 23456 $login@chopper.lcc.ufcg.edu.br:$path_server $path_local -o password_stdin
 	echo $login,$email >> $file_local
 	
 	password=""
