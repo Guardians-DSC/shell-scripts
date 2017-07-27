@@ -35,7 +35,7 @@ input_email() {
 
 create_mount_point(){
 	login=$(whoami)
-	mount_point="/home/$login/montagem-emails"
+	mount_point="/mnt_alunos/montagem-emails"
 	if [ -e "$mount_point" ]; then
 		fusermount -u $mount_point
 		rm -r $mount_point
@@ -76,8 +76,12 @@ done
 while true; do
 	password=$(dialog --stdout --no-cancel --ok-label "Ok" --title "Senha" --passwordbox "Poderia inserir a senha de seu usuario-LCC?" 0 0)
 	login=$(whoami)
-	path_log="/home/$login/log_vincula_email"
-	rm $path_log
+	path_log="/tmp/log_vincula_email"
+	
+	if [ -e "$path_log" ]; then
+		rm $path_log
+	fi
+	
 	sshpass -p $password ssh -p 23456 $login@chopper.lcc.ufcg.edu.br exit 2>$path_log
 	permission_denied=$(cat $path_log | grep "denied")
 	
@@ -93,7 +97,7 @@ done
 if [ "$usuario_ok" = "true" ]; then
 	create_mount_point
 	path_server="/opt/emails_cadastrados"
-	path_local="/home/$login/montagem-emails"
+	path_local="/mnt_alunos/montagem-emails"
 	file_local="$path_local/usuarios_cadastrados.csv"
 	
 	echo $password | sshfs -p 23456 $login@chopper.lcc.ufcg.edu.br:$path_server $path_local -o password_stdin
