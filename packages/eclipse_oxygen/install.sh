@@ -15,9 +15,9 @@ tar -zxvf eclipse_oxygen.tar.gz -C /opt/
 # Cria entrada do eclipse na barra de ferramentas do sistema
 echo -e "[Desktop Entry]\nVersion=1.0\nName=eclipse\nExec=/opt/eclipse/eclipse\nIcon=/opt/eclipse/icon.xpm\nType=Application\nCategories=Application" > /usr/share/applications/eclipse.desktop
 
-mv /usr/bin/eclipse /usr/bin/old-eclipse
+#mv /usr/bin/eclipse /usr/bin/old-eclipse
 
-ln -s /opt/eclipse/eclipse /usr/bin/eclipse
+#ln -s /opt/eclipse/eclipse /usr/bin/eclipse
 
 # deleta o arquivo eclipse_oxygen.tar.gz
 rm -rf eclipse_oxygen.tar.gz
