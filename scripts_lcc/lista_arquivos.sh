@@ -1,6 +1,8 @@
 #!/bin/bash
 
-paths=$(du -sh ~/* | sort -hr | zenity --list \
+user=$(whoami)
+
+files=$(du -sh /home/$user/* /home/$user/.??* 2>/dev/null | sort -hr | zenity --list \
 	--title "Diretorio/Arquivos" \
 	--text "Selecione o que deseja excluir" \
 	--width 640 \
@@ -9,3 +11,7 @@ paths=$(du -sh ~/* | sort -hr | zenity --list \
 	--column "Espaco - Arquivos" \
 	--checklist \
 	--separator " /")
+
+for file in $files; do
+	echo $("$file" | grep "/home/")
+done
