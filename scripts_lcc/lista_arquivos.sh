@@ -19,7 +19,6 @@ escolhidos=$(du -sh $downloads_user/* $documentos_user/* $imagens_user/* $videos
 
 for file in $escolhidos; do
 	if [[ "$file" =~ "/home/" ]]; then
-		echo $file
-		#rm -Rf $file
+		rm -Rf $file
 	fi
 done
