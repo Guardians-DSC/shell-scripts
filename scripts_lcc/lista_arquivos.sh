@@ -8,7 +8,7 @@ imagens_user="$home_user/Imagens"
 videos_user="$home_user/Videos"
 lixeira_user="$home_user/.local/share/Trash/files"
 	
-escolhidos=$(du -sh $downloads_user/* $documentos_user/* $imagens_user/* $videos_user/* $lixeira_user/* $home_user/* $home_user/.??* 2>/dev/null | sort -hr | zenity   --list \
+escolhidos=$(du -sh $downloads_user/* $documentos_user/* $imagens_user/* $videos_user/* $lixeira_user/* $home_user/* $home_user/.??* 2>/dev/null | sort -hr | zenity  --list \
 			--title "Arquivos/Pastas" \
 			--text "Selecione o(s) arquivo(s) ou pasta(s) que deseja excluir" \
 			--width 640 \
