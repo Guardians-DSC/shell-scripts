@@ -5,14 +5,20 @@ carregar_pastas() {
 	
 	for ((i = 0; i < ${#textos[*]}; i++)); do
 		$(for j in $1; do
-			du -sh $j 2> /dev/null | tee -a $arquivos_carregados
+			du -sh "$j" 2> /dev/null | tee -a $arquivos_carregados
 		  done) | zenity --progress \
 				--text="Verificando Arquivos e Pastas em  --  ${textos[$i]}  --" \
 				--pulsate \
 				--auto-close \
 				--width 500
+				
+				case $? in
+					1) exit ;;
+				esac
 		shift
 	done
+	
+	cat $arquivos_carregados
 	
 	if [ $? -eq 1 ]; then
 		exit
@@ -36,6 +42,10 @@ excluir_arquivo() {
 
 	rm -Rf "$file" | zenity --progress --text="Excluindo..." --pulsate --auto-close
 	#sed -i '/$escolhido/d' $arquivos_carregados
+	
+	case $? in
+		1) return 0 ;;
+	esac
 		
 }
 
