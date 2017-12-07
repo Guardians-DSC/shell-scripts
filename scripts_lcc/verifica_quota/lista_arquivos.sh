@@ -1,11 +1,13 @@
 #!/bin/bash
 
-carregar_pastas() {
+########################## FUNCTIONS ########################################################################################################
+
+verificar_pastas() {
 	textos=("Área de Trabalho" "Área de Trabalho (Ocultos)" "Downloads" "Documentos" "Imagens" "Vídeos" "Lixeira" "Cache" "Configurações")
 	
 	for ((i = 0; i < ${#textos[*]}; i++)); do
 		$(for j in $1; do
-			du -sh "$j" 2> /dev/null | tee -a $arquivos_carregados
+			du -sh "$j" 2>/dev/null | tee -a $arquivos_carregados
 		  done) | zenity --progress \
 				--text="Verificando Arquivos e Pastas em  --  ${textos[$i]}  --" \
 				--pulsate \
@@ -27,27 +29,31 @@ carregar_pastas() {
 }
 
 
+# Função criada para escluir o arquivo recebido
 excluir_arquivo() {
-	file=""
-	cont=0
+	line_file=$1
+	shift; shift
+	file_received=$*
 	
-	for string in $*; do
-		if [[ $cont -eq 1 ]]; then
-			file+=$string
-		elif [[ $cont -gt 1 ]]; then
-			file+=" "$string
-		fi
-		cont=$cont+1
-	done
-
-	rm -Rf "$file" | zenity --progress --text="Excluindo..." --pulsate --auto-close
-	#sed -i '/$escolhido/d' $arquivos_carregados
+	$(rm -Rf "$file_received") | zenity --progress --text="Excluindo Arquivo/Pasta..." --pulsate --auto-close
+	sed -i '${line_file}d' $arquivos_carregados
 	
 	case $? in
 		1) return 0 ;;
 	esac
+	
+	#case $rm_status in
+	#	0) zenity --info --text="Arquivo/Pasta deletado(a) com Sucesso!" --no-wrap ;;
 		
+	#	1) zenity --warning --text="Não foi possível excluir \n\nVerifique se o Arquivo/Pasta está aberto(a) ou \nsendo usado(a) no momento" --no-wrap ;;
+	#esac
 }
+
+
+########################## FUNCTIONS ########################################################################################################
+
+
+########################## MAIN #############################################################################################################
 
 user=$(whoami)
 home_user="/home/$user"
@@ -63,22 +69,23 @@ config_user="$home_user/.config/*"
 arquivos_carregados="/tmp/arquivosCarregados.txt"
 
 
+
 if [ -s $arquivos_carregados ]; then
 	rm $arquivos_carregados
 fi
 
-carregar_pastas "$home_user_all" "$home_user_ocult" "$downloads_user" "$documentos_user" "$imagens_user" "$xvideos_user" "$lixeira_user" "$cache_user" "$config_user"
+verificar_pastas "$home_user_all" "$home_user_ocult" "$downloads_user" "$documentos_user" "$imagens_user" "$xvideos_user" "$lixeira_user" "$cache_user" "$config_user"
 
 while true; do
 	
-	escolhido=$(cat $arquivos_carregados | sort -hr | zenity  --list \
+	chosen_file=$(cat $arquivos_carregados | sort -hr |  nl | zenity  --list \
 			--title "Arquivos/Pastas" \
 			--text "- Selecione o(s) arquivo(s) ou pasta(s) que deseja excluir" \
 			--width 640 \
 			--height 580 \
 			--cancel-label "Voltar" \
 			--ok-label "Excluir" \
-			--column "Tamanho  -  Arquivos/Pastas" \
+			--column " #  -  Tamanho  -  Arquivos/Pastas" \
 			--separator " /home")
 	
 	case $? in
@@ -88,7 +95,9 @@ while true; do
 	zenity --question --text="Tem certeza que desejar excluir?"
 	
 	case $? in
-		0) excluir_arquivo $escolhido ;;
+		0) excluir_arquivo $chosen_file ;;
 	esac
 
 done
+
+########################## MAIN #############################################################################################################
