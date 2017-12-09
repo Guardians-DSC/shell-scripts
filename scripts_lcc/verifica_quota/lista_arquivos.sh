@@ -20,7 +20,7 @@ verificar_pastas() {
 		shift
 	done
 	
-	cat $arquivos_carregados
+	cat $arquivos_carregados | sort -hr | nl > $arquivos_ordenados
 	
 	if [ $? -eq 1 ]; then
 		exit
@@ -36,7 +36,7 @@ excluir_arquivo() {
 	file_received=$*
 	
 	$(rm -Rf "$file_received") | zenity --progress --text="Excluindo Arquivo/Pasta..." --pulsate --auto-close
-	sed -i '${line_file}d' $arquivos_carregados
+	sed -i ${line_file}d $arquivos_ordenados
 	
 	case $? in
 		1) return 0 ;;
@@ -67,18 +67,19 @@ lixeira_user="$home_user/.local/share/Trash/files/*"
 cache_user="$home_user/.cache/*"
 config_user="$home_user/.config/*"
 arquivos_carregados="/tmp/arquivosCarregados.txt"
+arquivos_ordenados="/tmp/arquivosOrdenados.txt"
 
 
 
 if [ -s $arquivos_carregados ]; then
-	rm $arquivos_carregados
+	rm $arquivos_carregados $arquivos_ordenados
 fi
 
 verificar_pastas "$home_user_all" "$home_user_ocult" "$downloads_user" "$documentos_user" "$imagens_user" "$xvideos_user" "$lixeira_user" "$cache_user" "$config_user"
 
 while true; do
 	
-	chosen_file=$(cat $arquivos_carregados | sort -hr |  nl | zenity  --list \
+	chosen_file=$(cat $arquivos_ordenados |zenity  --list \
 			--title "Arquivos/Pastas" \
 			--text "- Selecione o(s) arquivo(s) ou pasta(s) que deseja excluir" \
 			--width 640 \
@@ -92,8 +93,8 @@ while true; do
 		1) break ;;
 	esac
 	
-	zenity --question --text="Tem certeza que desejar excluir?"
-	
+	zenity --question --title="Aviso" --text="Tem certeza que desejar excluir?" --no-wrap --default-cancel --cancel-label "Não" --ok-label "Sim" 
+		
 	case $? in
 		0) excluir_arquivo $chosen_file ;;
 	esac
