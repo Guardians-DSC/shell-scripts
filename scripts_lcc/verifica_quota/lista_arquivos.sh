@@ -23,14 +23,14 @@ deletar_arquivo_antigo() {
 # Função criada para calcular o tamanho das pastas que recebe como paramentro e salvar em um arquivo.txt
 analisar_pastas() {
 	textos=("Área de Trabalho" 
-			"Área de Trabalho (Ocultos)" 
-			"Downloads" 
-			"Documentos" 
-			"Imagens" 
-			"Vídeos" 
-			"Lixeira" 
-			"Cache" 
-			"Configurações")
+		"Área de Trabalho (Ocultos)" 
+		"Downloads" 	
+		"Documentos" 
+		"Imagens" 
+		"Vídeos" 
+		"Lixeira" 
+		"Cache" 	
+		"Configurações")
 	
 	for ((i = 0; i < ${#textos[*]}; i++)); do
 		$(for j in $1; do
@@ -61,7 +61,7 @@ mostrar_arquivos_pastas() {
 				--text "- Selecione o(s) arquivo(s) ou pasta(s) que deseja excluir" \
 				--width 640 \
 				--height 580 \
-				--cancel-label "Voltar" \
+				--cancel-label "Sair" \
 				--ok-label "Excluir" \
 				--column "    #  -  Tamanho  -  Arquivos/Pastas" \
 				--separator " /home")
@@ -115,14 +115,14 @@ excluir_arquivo() {
 main_lista_arquivos() {
 	deletar_arquivo_antigo
 	analisar_pastas "$home_user_all" \
-					"$home_user_ocult" \
-					"$downloads_user" \
-					"$documentos_user" \
-					"$imagens_user" \
-					"$xvideos_user" \
-					"$lixeira_user" \
-					"$cache_user" \
-					"$config_user"
+			"$home_user_ocult" \
+			"$downloads_user" \
+			"$documentos_user" \
+			"$imagens_user" \
+			"$xvideos_user" \
+			"$lixeira_user" \
+			"$cache_user" \
+			"$config_user"
 	
 	mostrar_arquivos_pastas
 
@@ -144,5 +144,3 @@ cache_user="$home_user/.cache/*"
 config_user="$home_user/.config/*"
 arquivos_analisados="/tmp/arquivosCarregados.txt"
 arquivos_ordenados="/tmp/arquivosOrdenados.txt"
-
-main_lista_arquivos
