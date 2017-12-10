@@ -61,13 +61,16 @@ mostrar_arquivos_pastas() {
 				--text "- Selecione o(s) arquivo(s) ou pasta(s) que deseja excluir" \
 				--width 640 \
 				--height 580 \
-				--cancel-label "Sair" \
+				--cancel-label "Voltar" \
 				--ok-label "Excluir" \
 				--column "    #  -  Tamanho  -  Arquivos/Pastas" \
 				--separator " /home")
 		
-		verifica_status
-		confirmacao=$(confirmar_exclusao_arquivos)
+		case $? in
+			0) confirmacao=$(confirmar_exclusao_arquivos) ;;
+			
+			1) $aviso_usuario_path; exit ;;
+		esac
 	
 		if [[ "$confirmacao" == "true" ]]; then
 			excluir_arquivo $chosen_file
@@ -144,3 +147,4 @@ cache_user="$home_user/.cache/*"
 config_user="$home_user/.config/*"
 arquivos_analisados="/tmp/arquivosCarregados.txt"
 arquivos_ordenados="/tmp/arquivosOrdenados.txt"
+aviso_usuario_path="./aviso_usuario.sh"
