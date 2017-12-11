@@ -52,9 +52,6 @@ alterar_limite() {
 		--height 150 \
 		--value=$limit )
 	
-	echo $new_limit
-	echo $?
-	
 	case $? in
 		
 		0) sed -i "1s/.*/$new_limit/" $file_user ; main_aviso_usuario ;;
