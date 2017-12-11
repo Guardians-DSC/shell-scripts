@@ -44,8 +44,8 @@ main_aviso_usuario() {
 	img_guardians="guardians2.jpg"
 	icon_guardians="guardiansIcon.jpg"
 	aviso_principal="<big><big><big> $user</big><b> você está utilizando mais de $limit% \n da sua cota de disco atual</b></big></big>"
-	aviso_cota_total="<big><b>- Cota Total: </b></big><big>$total M</big>"
-	aviso_cota_usada="<big><b>- Cota Utilizada: </b></big><big>$usado M </big>"
+	aviso_cota_total="<big><b>- Cota Total: </b></big><big>$total_m</big>"
+	aviso_cota_usada="<big><b>- Cota Utilizada: </b></big><big>$usado_m</big>"
 	text_inform_1="<big>Você pode clicar no botão <i>Analisar Todos os Arquivos</i> \n para excluir algum arquivo ou pasta que esteja \n ocupando muito espaço.</big>"
 	text_inform_2="<big>Se quiser também, pode clicar em <i>Apagar Lixeira</i>\n ou <i>Apagar Cache</i>. Para deletar os arquivos da\n Lixeira ou Cache (Google Chrome, Firefox...).</big>"
 	
@@ -72,17 +72,14 @@ main_aviso_usuario() {
 # - Zenity
 # - quota
 
+cota_ultrapassou=$1
 user=$(whoami)
 home_user="/home/$user"
 lixeira_user="$home_user/.local/share/Trash/files/*"
 cache_user="$home_user/.cache/*"
 local_imgs="graficoUso"
-readonly limit=70
 
-usado=86
-total=100
-percent=$(echo "scale=2; ($usado / $total) * 100" | bc | cut -d "." -f1)
 
-if [[ $percent -ge $limit ]]; then
+if [[ "$cota_ultrapassou" == "true" ]]; then
 	main_aviso_usuario
 fi
