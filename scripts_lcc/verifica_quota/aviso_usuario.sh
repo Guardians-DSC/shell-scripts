@@ -5,7 +5,8 @@
 #---> zenity
 #---> quota
 
-path_atual=$(pwd)
+sleep 5s
+path_atual=$(dirname $0)
 verifica_quota_path="$path_atual/verifica_quota.sh"
 lista_arquivos_path="$path_atual/lista_arquivos.sh"
 local_imgs="$path_atual/graficoUso"
@@ -33,7 +34,14 @@ verifica_status_aviso_usuario() {
 
 
 apagar_lixeira() {
-	rm -Rf $lixeira_user && zenity --info --title="Aviso" --text="Lixeira Deletada com Sucesso."; main_aviso_usuario
+	$(rm -Rf $lixeira_user && zenity) | zenity \
+		--progress \
+		--text="Excluindo Arquivo/Pasta..." \
+		--pulsate \
+		--auto-close && zenity \
+		--info \
+		--title="Aviso" \
+		--text="Lixeira Deletada com Sucesso."; main_aviso_usuario
 }
 
 
@@ -84,7 +92,7 @@ update_percent_aviso_usuario() {
 	percent=$(sed -n 4p $file_user)
 
 
-	if [[ $percent -ge $limit ]]; then
+	if [[ $percent -gt $limit ]]; then
 		aviso_excedeu="<big><big><big> $user</big><b> você está utilizando mais de $limit% \n da sua cota de disco atual!</b></big></big> \n\n"
 	else
 		aviso_excedeu=""

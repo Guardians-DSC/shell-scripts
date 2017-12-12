@@ -5,7 +5,7 @@
 # Função criada para verificar o status atual da variavel $? e sair do script se for igual a 1
 verifica_status() {
 	case $? in
-		1) exit ;;
+		1) $aviso_usuario_path; exit ;;
 	esac
 
 }
@@ -13,8 +13,10 @@ verifica_status() {
 
 # Função criada para deletar o arquivo .txt que salva as o caminho das pastas, caso ela já exista
 deletar_arquivo_antigo() {
-	if [ -s $arquivos_analisados ]; then
+	if [[ -s $arquivos_analisados || -s $arquivos_ordenados ]]; then
 		rm $arquivos_analisados $arquivos_ordenados
+	else
+		touch $arquivos_analidos $arquivos_ordenados && chmod 777 $arquivos_analidos $arquivos_ordenados
 	fi
 
 }
@@ -103,7 +105,7 @@ excluir_arquivo() {
 	shift; shift # Remove o primeiro e segundo parametros que são a linha e tamanho do arquivos
 	file_received=$* # Atribui dos os parametros recebidos na variavel
 	
-	$(rm -Rf "$file_received" && sed -i ${line_file}d $arquivos_ordenados) | zenity \
+	$(rm -Rf "$file_received" && sed -i "${line_file}s/.*/------- DELETADO -------/" $arquivos_ordenados) | zenity \
 		--progress \
 		--text="Excluindo Arquivo/Pasta..." \
 		--pulsate \
@@ -135,7 +137,7 @@ main_lista_arquivos() {
 
 # Declaração de variaveis globais do script
 user=$(whoami)
-path_atual=$(pwd)
+path_atual=$(dirname $0)
 home_user="/home/$user"
 home_user_all="$home_user/*"
 home_user_ocult="$home_user/.??*"

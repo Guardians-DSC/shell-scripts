@@ -10,21 +10,28 @@ get_percent() {
 		echo $limit_default > $file_user
 	fi
 
-	#usado_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f2)
-	#total_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f3)
-	usado_m="1300M" # Para testar
- 	total_m="2000M" # Para testar
-	
+	usado_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f2)
+	total_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f3)
+	#usado_m="2100M*" # Para testar
+ 	#total_m="2000M" # Para testar
+ 	
+ 	len_usado=${#usado_m}
+	len_total=${#total_m}
+ 	
+ 	isFull=$(echo $usado_m | grep "*")
+ 	
+ 	if [[ -n $isFull ]]; then
+		usado_m=${usado_m:0:$len_usado}	
+		percent=100	
+	else	
+		usado=${usado_m:0:$len_usado-1}
+		total=${total_m:0:$len_total-1}
+		
+		percent=$(echo "scale=2; ($usado / $total) * 100" | bc | cut -d "." -f1)	
+	fi
+
 	echo $usado_m >> $file_user
 	echo $total_m >> $file_user
-
-	len_usado=${#usado_m}
-	len_total=${#total_m}
-
-	usado=${usado_m:0:$len_usado-1}
-	total=${total_m:0:$len_total-1}
-
-	percent=$(echo "scale=2; ($usado / $total) * 100" | bc | cut -d "." -f1)
 	echo $percent >> $file_user	
 	
 }
