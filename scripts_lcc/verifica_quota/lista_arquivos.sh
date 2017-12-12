@@ -4,9 +4,9 @@
 
 # Função criada para verificar o status atual da variavel $? e sair do script se for igual a 1
 verifica_status() {
-		case $? in
-			1) exit ;;
-		esac
+	case $? in
+		1) exit ;;
+	esac
 
 }
 
@@ -14,7 +14,7 @@ verifica_status() {
 # Função criada para deletar o arquivo .txt que salva as o caminho das pastas, caso ela já exista
 deletar_arquivo_antigo() {
 	if [ -s $arquivos_analisados ]; then
-	rm $arquivos_analisados $arquivos_ordenados
+		rm $arquivos_analisados $arquivos_ordenados
 	fi
 
 }
@@ -135,6 +135,7 @@ main_lista_arquivos() {
 
 # Declaração de variaveis globais do script
 user=$(whoami)
+path_atual=$(pwd)
 home_user="/home/$user"
 home_user_all="$home_user/*"
 home_user_ocult="$home_user/.??*"
@@ -147,4 +148,4 @@ cache_user="$home_user/.cache/*"
 config_user="$home_user/.config/*"
 arquivos_analisados="/tmp/arquivosCarregados.txt"
 arquivos_ordenados="/tmp/arquivosOrdenados.txt"
-aviso_usuario_path="./aviso_usuario.sh"
+aviso_usuario_path="$path_atual/aviso_usuario.sh"

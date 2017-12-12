@@ -1,13 +1,6 @@
 #!/bin/bash
 
 get_percent() {
-	user=$(whoami)
-	readonly limit_default=70
-	file_user="/home/$user/.infoCotaUser"
-	# 1 linha - limite para atingir o aviso
-	# 2 linha - cota usada
-	# 3 linha - cota total
-	# 4 linha - porcentagem
 	
 	if [ -e $file_user ]; then
 		sed -i 4d $file_user
@@ -17,8 +10,11 @@ get_percent() {
 		echo $limit_default > $file_user
 	fi
 
-	usado_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f2)
-	total_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f3)
+	#usado_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f2)
+	#total_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f3)
+	usado_m="1300M" # Para testar
+ 	total_m="2000M" # Para testar
+	
 	echo $usado_m >> $file_user
 	echo $total_m >> $file_user
 
@@ -34,8 +30,13 @@ get_percent() {
 }
 
 
-
-
+user=$(whoami)
+readonly limit_default=70
+file_user="/home/$user/.infoCotaUser"
+#---> 1 linha - limite para atingir o aviso
+#---> 2 linha - cota usada
+#---> 3 linha - cota total
+#---> 4 linha - porcentagem
 
 
 

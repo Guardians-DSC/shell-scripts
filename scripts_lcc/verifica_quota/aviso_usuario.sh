@@ -1,7 +1,17 @@
 #!/bin/bash
 
-source ./lista_arquivos.sh
-source ./verifica_quota.sh
+# Necessario ter instalado:
+#---> yad
+#---> zenity
+#---> quota
+
+path_atual=$(pwd)
+verifica_quota_path="$path_atual/verifica_quota.sh"
+lista_arquivos_path="$path_atual/lista_arquivos.sh"
+local_imgs="$path_atual/graficoUso"
+
+source $verifica_quota_path
+source $lista_arquivos_path
 
 
 verifica_status_aviso_usuario() {
@@ -50,7 +60,9 @@ alterar_limite() {
 		--center \
 		--width 400 \
 		--height 150 \
-		--value=$limit )
+		--value=$limit \
+		--min-value=20 \
+		--inc-buttons)
 	
 	case $? in
 		
@@ -83,9 +95,8 @@ update_percent_aviso_usuario() {
 
 main_aviso_usuario() {
 	update_percent_aviso_usuario
-	graph="$local_imgs/$percent"_usado.png
-	img_guardians="guardians2.jpg"
-	icon_guardians="guardiansIcon.jpg"	
+	
+	graph="$local_imgs/$percent"_usado.png	
 	aviso_cota_total="<big><b>- Cota Total: </b></big><big>$total_m</big> \n\n"
 	aviso_cota_usada="<big><b>- Cota Utilizada: </b></big><big>$usado_m</big> \n\n\n"
 	text_inform_1="<big>Você pode clicar no botão <i>Analisar Todos os Arquivos</i> \n para excluir algum arquivo ou pasta que esteja \n ocupando muito espaço.</big> \n\n"
@@ -111,16 +122,11 @@ main_aviso_usuario() {
 	verifica_status_aviso_usuario
 }
 
-# Necessario ter instalado:
-# - Yad
-# - Zenity
-# - quota
 
 user=$(whoami)
 home_user="/home/$user"
 lixeira_user="$home_user/.local/share/Trash/files/*"
 cache_user="$home_user/.cache/*"
-local_imgs="graficoUso"
 file_user="/home/$user/.infoCotaUser"
 
 limit=""
