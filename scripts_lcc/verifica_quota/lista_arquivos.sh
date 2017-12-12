@@ -5,7 +5,7 @@
 # Função criada para verificar o status atual da variavel $? e sair do script se for igual a 1
 verifica_status() {
 	case $? in
-		1) $aviso_usuario_path; exit ;;
+		1) eletar_arquivo_antigo; $aviso_usuario_path; exit ;;
 	esac
 
 }
@@ -16,7 +16,10 @@ deletar_arquivo_antigo() {
 	if [[ -s $arquivos_analisados || -s $arquivos_ordenados ]]; then
 		rm $arquivos_analisados $arquivos_ordenados
 	else
-		touch $arquivos_analidos $arquivos_ordenados && chmod 777 $arquivos_analidos $arquivos_ordenados
+		touch $arquivos_analidos 
+		touch $arquivos_ordenados
+		chmod 777 $arquivos_analidos 
+		chmod 777 $arquivos_ordenados
 	fi
 
 }
@@ -71,7 +74,7 @@ mostrar_arquivos_pastas() {
 		case $? in
 			0) confirmacao=$(confirmar_exclusao_arquivos) ;;
 			
-			1) $aviso_usuario_path; exit ;;
+			1) deletar_arquivo_antigo; $aviso_usuario_path; exit ;;
 		esac
 	
 		if [[ "$confirmacao" == "true" ]]; then

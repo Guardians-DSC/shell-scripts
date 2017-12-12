@@ -5,7 +5,6 @@
 #---> zenity
 #---> quota
 
-sleep 5s
 path_atual=$(dirname $0)
 verifica_quota_path="$path_atual/verifica_quota.sh"
 lista_arquivos_path="$path_atual/lista_arquivos.sh"
@@ -69,7 +68,7 @@ alterar_limite() {
 		--width 400 \
 		--height 150 \
 		--value=$limit \
-		--min-value=20 \
+		--min-value=1 \
 		--inc-buttons)
 	
 	case $? in
@@ -92,7 +91,7 @@ update_percent_aviso_usuario() {
 	percent=$(sed -n 4p $file_user)
 
 
-	if [[ $percent -gt $limit ]]; then
+	if [[ $percent -ge $limit ]]; then
 		aviso_excedeu="<big><big><big> $user</big><b> você está utilizando mais de $limit% \n da sua cota de disco atual!</b></big></big> \n\n"
 	else
 		aviso_excedeu=""
