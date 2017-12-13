@@ -18,29 +18,29 @@ verifica_status_aviso_usuario() {
 	
 	case $? in
 		
-		0) main_lista_arquivos ;;
+		0) exit & main_lista_arquivos ;;
 		
 		1) exit ;;
 		
-		2) apagar_lixeira ;;
+		2) exit & limpar_lixeira ;;
 		
-		3) apagar_cache ;;
+		3) exit & apagar_cache ;;
 		
-		4) alterar_limite ;;
+		4) exit & alterar_limite ;;
 
 	esac
 }
 
 
-apagar_lixeira() {
-	$(rm -Rf $lixeira_user && zenity) | zenity \
+limpar_lixeira() {
+	$(rm -Rf $lixeira_user) | zenity \
 		--progress \
 		--text="Excluindo Arquivo/Pasta..." \
 		--pulsate \
 		--auto-close && zenity \
 		--info \
 		--title="Aviso" \
-		--text="Lixeira Deletada com Sucesso."; main_aviso_usuario
+		--text="Lixeira Limpa com Sucesso."; exit & main_aviso_usuario
 }
 
 
@@ -52,9 +52,16 @@ apagar_cache() {
 	
 	case $? in
 		
-		0) rm -Rf $cache_user && zenity --info --text="Cache Deletado com Sucesso." --title="Aviso"; main_aviso_usuario ;;
+		0) $(rm -Rf $cache_user) | zenity \
+		--progress \
+		--text="Excluindo Arquivo/Pasta..." \
+		--pulsate \
+		--auto-close && zenity \
+		--info \
+		--text="Cache Deletado com Sucesso." \
+		--title="Aviso"; exit & main_aviso_usuario ;;
 		
-		1) main_aviso_usuario ;;
+		1) exit & main_aviso_usuario ;;
 	
 	esac
 }
@@ -73,9 +80,9 @@ alterar_limite() {
 	
 	case $? in
 		
-		0) sed -i "1s/.*/$new_limit/" $file_user ; main_aviso_usuario ;;
+		0) sed -i "1s/.*/$new_limit/" $file_user ; exit & main_aviso_usuario ;;
 		
-		1) main_aviso_usuario ;;
+		1) exit & main_aviso_usuario ;;
 	
 	esac
 	
@@ -112,7 +119,6 @@ main_aviso_usuario() {
 	
 	yad --form \
 	--title="Aviso - Guardians" \
-	--window-icon "$icon_guardians" \
 	--width 1100 \
 	--height 375 \
 	--center \
