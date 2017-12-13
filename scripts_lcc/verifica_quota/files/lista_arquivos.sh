@@ -121,7 +121,7 @@ excluir_arquivo() {
 	shift; shift # Remove o primeiro e segundo parametros que são a linha e tamanho do arquivos
 	file_received=$* # Atribui dos os parametros recebidos na variavel
 	
-	$(rsync -a --delete "$file_received" && sed -i "${line_file}s/.*/------- DELETADO -------/" $arquivos_ordenados) | zenity \
+	$(rm -Rf "$file_received" && sed -i "${line_file}s/.*/------- DELETADO -------/" $arquivos_ordenados) | zenity \
 		--progress \
 		--text="Excluindo Arquivo/Pasta..." \
 		--pulsate \
