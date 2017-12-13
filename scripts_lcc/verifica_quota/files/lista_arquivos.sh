@@ -54,7 +54,7 @@ analisar_pastas() {
 		$(for j in $1; do
 			du -sh "$j" 2>/dev/null | tee -a $arquivos_analisados
 		  done) | zenity --progress \
-				--text="Pode emorar alguns minutos...\n\n Verificando Arquivos e Pastas em  --  ${textos_msg[$i]}  --" \
+				--text="Pode demorar alguns minutos...\n\n Verificando Arquivos e Pastas em  --  ${textos_msg[$i]}  --" \
 				--pulsate \
 				--auto-close \
 				--width 500

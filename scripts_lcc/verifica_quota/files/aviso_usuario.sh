@@ -109,8 +109,8 @@ update_percent_aviso_usuario() {
 
 main_aviso_usuario() {
 	update_percent_aviso_usuario
-	
-	graph="$local_imgs/$percent"_usado.png	
+	icon_guardians="$path_atual/guardians.png"
+	graph="$local_imgs/$percent"_usado.png
 	aviso_cota_total="<big><b>- Cota Total: </b></big><big>$total_m</big> \n\n"
 	aviso_cota_usada="<big><b>- Cota Utilizada: </b></big><big>$usado_m</big> \n\n\n"
 	text_inform_1="<big>Você pode clicar no botão <i>Analisar Todos os Arquivos</i> \n para excluir algum arquivo ou pasta que esteja \n ocupando muito espaço.</big> \n\n"
@@ -123,6 +123,7 @@ main_aviso_usuario() {
 	--height 375 \
 	--center \
 	--fixed \
+	--window-icon "$icon_guardians" \
 	--image "$graph" \
 	--text="$aviso_excedeu $aviso_cota_total $aviso_cota_usada $text_inform_1 $text_inform_2 $text_inform_3" \
 	--button="<b>Analisar Todos os Arquivos</b>":0 \
