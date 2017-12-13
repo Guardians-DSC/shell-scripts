@@ -19,5 +19,5 @@ total_m=$(sed -n 3p $file_user)
 percent=$(sed -n 4p $file_user)
 
 if [[ $percent -ge $limit ]]; then
-	sleep 5s; $aviso_usuario_path
+	sleep 7s; $aviso_usuario_path
 fi
