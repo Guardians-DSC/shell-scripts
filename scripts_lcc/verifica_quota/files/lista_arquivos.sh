@@ -13,13 +13,11 @@ verifica_status() {
 
 # Função criada para deletar o arquivo .txt que salva as o caminho das pastas, caso ela já exista
 deletar_arquivo_antigo() {
-	if [[ -s $arquivos_analisados || -s $arquivos_ordenados ]]; then
+	if [[ -s $arquivos_analisados ]] || [[ -s $arquivos_ordenados ]]; then
 		rm $arquivos_analisados $arquivos_ordenados
 	else
-		touch $arquivos_analidos 
-		touch $arquivos_ordenados
-		chmod 777 $arquivos_analidos 
-		chmod 777 $arquivos_ordenados
+		touch $arquivos_analidos $arquivos_ordenados
+		chmod 777 $arquivos_analidos $arquivos_ordenados
 	fi
 
 }
