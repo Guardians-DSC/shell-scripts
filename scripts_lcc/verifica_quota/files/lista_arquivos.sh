@@ -34,7 +34,7 @@ analisar_apenas_home () {
 		du -sh "$home_user/$i" 2>/dev/null | tee -a $arquivos_analisados
 		verifica_status
 	done ) | zenity --progress \
-			--text="Pode demorar alguns minutos...\n\n Verificando Arquivos e Pastas em  --  $texto_home  --" \
+			--text="Pode demorar alguns minutos...\n\nVerificando Arquivos e Pastas em  --  $texto_home  --" \
 			--pulsate \
 			--auto-close \
 			--width 500
@@ -54,7 +54,7 @@ analisar_pastas() {
 		$(for j in $1; do
 			du -sh "$j" 2>/dev/null | tee -a $arquivos_analisados
 		  done) | zenity --progress \
-				--text="Pode demorar alguns minutos...\n\n Verificando Arquivos e Pastas em  --  ${textos_msg[$i]}  --" \
+				--text="Pode demorar alguns minutos...\n\nVerificando Arquivos e Pastas em  --  ${textos_msg[$i]}  --" \
 				--pulsate \
 				--auto-close \
 				--width 500
@@ -76,7 +76,7 @@ mostrar_arquivos_pastas() {
 	
 		chosen_file=$(cat $arquivos_ordenados | zenity  --list \
 				--title "Arquivos/Pastas" \
-				--text "- Selecione o(s) arquivo(s) ou pasta(s) que deseja excluir" \
+				--text "<big><b>- Selecione o(s) arquivo(s) ou pasta(s) que deseja excluir</b></big>\n" \
 				--width 640 \
 				--height 580 \
 				--cancel-label "Voltar" \
@@ -121,7 +121,14 @@ excluir_arquivo() {
 	shift; shift # Remove o primeiro e segundo parametros que são a linha e tamanho do arquivos
 	file_received=$* # Atribui dos os parametros recebidos na variavel
 	
-	$(rm -Rf "$file_received" && sed -i "${line_file}s/.*/------- DELETADO -------/" $arquivos_ordenados) | zenity \
+	
+	$(if [[ -d $file_received ]]; then
+		empty_dir=$(mktemp -d); rsync -r --delete $empty_dir/ $file_received
+	else
+		rm -f $file_received
+	fi 
+	
+	sed -i "${line_file}s/.*/------- DELETADO -------/" $arquivos_ordenados) | zenity \
 		--progress \
 		--text="Excluindo Arquivo/Pasta..." \
 		--pulsate \

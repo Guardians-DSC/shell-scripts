@@ -33,7 +33,8 @@ verifica_status_aviso_usuario() {
 
 
 limpar_lixeira() {
-	$(rm -Rf $lixeira_user) | zenity \
+	empty_dir=$(mktemp -d)
+	$(rsync -r --delete $empty_dir/ $lixeira_user) | zenity \
 		--progress \
 		--text="Excluindo Arquivo/Pasta..." \
 		--pulsate \
@@ -52,7 +53,7 @@ apagar_cache() {
 	
 	case $? in
 		
-		0) $(rm -Rf $cache_user) | zenity \
+		0) $(empty_dir=$(mktemp -d); rsync -r --delete $empty_dir/ $cache_user) | zenity \
 		--progress \
 		--text="Excluindo Arquivo/Pasta..." \
 		--pulsate \
@@ -139,8 +140,8 @@ main_aviso_usuario() {
 
 user=$(whoami)
 home_user="/home/$user"
-lixeira_user="$home_user/.local/share/Trash/files/*"
-cache_user="$home_user/.cache/*"
+lixeira_user="$home_user/.local/share/Trash/files/"
+cache_user="$home_user/.cache/"
 file_user="/home/$user/.infoCotaUser"
 
 limit=""
