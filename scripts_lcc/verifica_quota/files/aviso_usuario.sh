@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Necessario ter instalado:
+# NECESSÁRIO TER INSTALADO:
 #---> yad
 #---> zenity
 #---> quota
@@ -27,6 +27,8 @@ verifica_status_aviso_usuario() {
 		3) exit & apagar_cache ;;
 		
 		4) exit & alterar_limite ;;
+		
+		5) exit & reportar_bug ;;
 
 	esac
 }
@@ -77,7 +79,7 @@ alterar_limite() {
 		--height 150 \
 		--value=$limit \
 		--min-value=1 \
-		--inc-buttons)
+		--inc-buttons )
 	
 	case $? in
 		
@@ -87,6 +89,24 @@ alterar_limite() {
 	
 	esac
 	
+}
+
+reportar_bug() {
+	bug=$(zenity --entry \
+		--title="Informe o problema" \
+		--width 400 \
+		--height 200 \
+		--ok-label="Enviar" \
+		--cancel-label="Voltar" )
+	
+	case $? in
+		
+		0) ;;
+		
+		1) exit & main_aviso_usuario ;;
+	
+	esac
+
 }
 
 
@@ -131,6 +151,7 @@ main_aviso_usuario() {
 	--button="<b>Limpar Lixeira</b>":2 \
 	--button="<b>Limpar Cache</b>":3 \
 	--button="<b>Alterar Limite</b>":4 \
+	--button="<b>Reportar um Bug</b>":5 \
 	--button=gtk-quit:1 
 	
 	

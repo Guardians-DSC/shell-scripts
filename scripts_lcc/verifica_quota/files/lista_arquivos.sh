@@ -23,8 +23,9 @@ deletar_arquivo_antigo() {
 }
 
 
+# Analisa a home do usuário
 analisar_apenas_home () {
-	texto_home="Área de Trabalho"
+	texto_home="Home"
 	shopt -s extglob
 	
 	i="${i##*( )}"

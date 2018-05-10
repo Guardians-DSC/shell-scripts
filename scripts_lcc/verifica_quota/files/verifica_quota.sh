@@ -9,23 +9,21 @@ get_percent() {
 	else
 		echo $limit_default > $file_user
 	fi
-
+	
 	usado_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f2)
 	total_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f3)
-	#usado_m="2100M*" # Para testar
- 	#total_m="2000M" # Para testar
  	
- 	len_usado=${#usado_m}
-	len_total=${#total_m}
+ 	lenght_usado=${#usado_m}
+	lenght_total=${#total_m}
  	
  	isFull=$(echo $usado_m | grep "*")
  	
  	if [[ -n $isFull ]]; then
-		usado_m=${usado_m:0:$len_usado}	
+		usado_m=${usado_m:0:$lenght_usado}	
 		percent=100	
 	else	
-		usado=${usado_m:0:$len_usado-1}
-		total=${total_m:0:$len_total-1}
+		usado=${usado_m:0:$lenght_usado - 1}
+		total=${total_m:0:$lenght_total - 1}
 		
 		percent=$(echo "scale=2; ($usado / $total) * 100" | bc | cut -d "." -f1)	
 	fi
@@ -40,10 +38,10 @@ get_percent() {
 user=$(whoami)
 readonly limit_default=70
 file_user="/home/$user/.infoCotaUser"
-#---> 1 linha - limite para atingir o aviso
-#---> 2 linha - cota usada
-#---> 3 linha - cota total
-#---> 4 linha - porcentagem
+#---> linha 1 - limite para atingir o aviso
+#---> linha 2 - cota usada
+#---> linha 3 - cota total
+#---> linha 4 - porcentagem
 
 
 

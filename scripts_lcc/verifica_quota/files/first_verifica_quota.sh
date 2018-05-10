@@ -13,10 +13,10 @@ source $verifica_quota_path
 
 get_percent
 
-limit=$(sed -n 1p $file_user)
-usado_m=$(sed -n 2p $file_user)
-total_m=$(sed -n 3p $file_user)
-percent=$(sed -n 4p $file_user)
+limit=$(sed -n 1p $file_user) #---> linha 1 - limite para atingir o aviso
+usado_m=$(sed -n 2p $file_user) #---> linha 2 - cota usada
+total_m=$(sed -n 3p $file_user) #---> linha 3 - cota total
+percent=$(sed -n 4p $file_user) #---> linha 4 - porcentagem
 
 if [[ $percent -ge $limit ]]; then
 	sleep 7s; $aviso_usuario_path
