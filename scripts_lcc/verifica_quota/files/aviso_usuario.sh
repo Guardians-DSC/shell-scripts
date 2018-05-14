@@ -1,18 +1,25 @@
 #!/bin/bash
 
-# NECESSÁRIO TER INSTALADO:
-#---> yad
-#---> zenity
-#---> quota
+###################### AVISO ####################################
+																#
+# NECESSÁRIO TER INSTALADO:										#
+#---> yad														#
+#---> zenity													#
+#---> quota														#
+																#
+###################### AVISO ####################################
+
 
 path_atual=$(dirname $0)
-verifica_quota_path="$path_atual/verifica_quota.sh"
-lista_arquivos_path="$path_atual/lista_arquivos.sh"
+path_verifica_quota="$path_atual/verifica_quota.sh"
+path_lista_arquivos="$path_atual/lista_arquivos.sh"
 local_imgs="$path_atual/graficoUso"
 
-source $verifica_quota_path
-source $lista_arquivos_path
+source $path_verifica_quota "not logging"
+source $path_lista_arquivos
 
+
+########################## FUNCTIONS ########################################################################################################
 
 verifica_status_aviso_usuario() {
 	
@@ -151,13 +158,14 @@ main_aviso_usuario() {
 	--button="<b>Limpar Lixeira</b>":2 \
 	--button="<b>Limpar Cache</b>":3 \
 	--button="<b>Alterar Limite</b>":4 \
-	--button="<b>Reportar um Bug</b>":5 \
-	--button=gtk-quit:1 
+	--button=gtk-quit:1 \
+	# --button="<b>Reportar um Bug</b>":5 \
 	
 	
 	verifica_status_aviso_usuario
 }
 
+########################## END FUNCTIONS ########################################################################################################
 
 user=$(whoami)
 home_user="/home/$user"

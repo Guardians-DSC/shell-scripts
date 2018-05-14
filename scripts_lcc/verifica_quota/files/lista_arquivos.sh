@@ -64,7 +64,7 @@ analisar_pastas() {
 		shift
 	done
 	
-	# Ordena os arquivos pelo tamanho e atribui linhas a cada um
+	# Ordena os arquivos pelo tamanho e atribui linhas a cada um deles
 	cat $arquivos_analisados | sort -hr | nl > $arquivos_ordenados
 	verifica_status
 	
@@ -145,12 +145,13 @@ main_lista_arquivos() {
 	deletar_arquivo_antigo
 	analisar_apenas_home
 	analisar_pastas "$downloads_user" "$documentos_user" "$imagens_user" "$xvideos_user" "$lixeira_user" "$cache_user" "$config_user"
-	
 	mostrar_arquivos_pastas
 
 }
 
-########################## MAIN #############################################################################################################
+########################## END FUNCTIONS ########################################################################################################
+
+#######################################################################################################################################
 
 # Declaração de variaveis globais do script
 user=$(whoami)
