@@ -3,9 +3,7 @@
 get_percent() {
 	
 	if [ -e $file_user ]; then
-		sed -i 4d $file_user
-		sed -i 3d $file_user
-		sed -i 2d $file_user
+		sed -i '2,$d' $file_user
 	else
 		echo $limit_default > $file_user
 	fi
