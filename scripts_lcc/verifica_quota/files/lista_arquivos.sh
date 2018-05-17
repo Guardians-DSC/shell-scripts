@@ -2,17 +2,21 @@
 
 ########################## FUNCTIONS ########################################################################################################
 
-# Função criada para verificar o status atual da variavel $? e sair do script se for igual a 1
+
 verifica_status() {
+	# Função criada para verificar o status atual da variavel $? e sair do script se for igual a 1
+	
 	case $? in
-		1) deletar_arquivo_antigo; exit & $aviso_usuario_path; exit ;;
+		1) deletar_arquivo_antigo; exit 1 & $aviso_usuario_path ;;
 	esac
 
 }
 
 
-# Função criada para deletar o arquivo .txt que salva as o caminho das pastas, caso ela já exista
+
 deletar_arquivo_antigo() {
+	# Função criada para deletar o arquivo .txt que salva as o caminho das pastas, caso ela já exista
+	
 	if [[ -s $arquivos_analisados ]] || [[ -s $arquivos_ordenados ]]; then
 		rm $arquivos_analisados $arquivos_ordenados
 	else
@@ -23,8 +27,10 @@ deletar_arquivo_antigo() {
 }
 
 
-# Analisa a home do usuário
+
 analisar_apenas_home () {
+	# Analisa a home do usuário
+	
 	texto_home="Home"
 	shopt -s extglob
 	
@@ -32,6 +38,7 @@ analisar_apenas_home () {
 	i="${i%%*( )}"
 	
 	$(for i in $home_user_all; do
+		echo $i
 		du -sh "$home_user/$i" 2>/dev/null | tee -a $arquivos_analisados
 		verifica_status
 	done ) | zenity --progress \
@@ -46,8 +53,9 @@ analisar_apenas_home () {
 }
 
 
-# Função criada para calcular o tamanho das pastas que recebe como paramentro e salvar em um arquivo.txt
+
 analisar_pastas() {
+	# Função criada para calcular o tamanho das pastas que recebe como paramentro e salvar em um arquivo.txt
 	
 	textos_msg=( "Downloads" "Documentos" "Imagens" "Vídeos" "Lixeira" "Cache" "Configurações" )
 	
@@ -71,8 +79,10 @@ analisar_pastas() {
 }
 
 
-# Função criada para exibir os arquivos e pastas analisados
+
 mostrar_arquivos_pastas() {
+	# Função criada para exibir os arquivos e pastas analisados
+	
 	while true; do
 	
 		chosen_file=$(cat $arquivos_ordenados | zenity  --list \
@@ -99,8 +109,10 @@ mostrar_arquivos_pastas() {
 }
 
 
-# Função criada para confirmar se o usuario quer mesmo excluir o arquivo
+
 confirmar_exclusao_arquivos() {
+	# Função criada para confirmar se o usuario quer mesmo excluir o arquivo
+	
 	zenity --question \
 		--title="Aviso" \
 		--text="Tem certeza que desejar excluir?" \
@@ -116,8 +128,10 @@ confirmar_exclusao_arquivos() {
 }
 
 
-# Função criada para escluir o arquivo recebido
+
 excluir_arquivo() {
+	# Função criada para escluir o arquivo recebido
+	
 	line_file=$1 # Primeiro Parametro recebido é a linha do arquivo a ser deletado
 	shift; shift # Remove o primeiro e segundo parametros que são a linha e tamanho do arquivos
 	file_received=$* # Atribui dos os parametros recebidos na variavel
@@ -140,8 +154,10 @@ excluir_arquivo() {
 }
 
 
-# Função Main do script
+
 main_lista_arquivos() {
+	# Função Main do script
+	
 	deletar_arquivo_antigo
 	analisar_apenas_home
 	analisar_pastas "$downloads_user" "$documentos_user" "$imagens_user" "$xvideos_user" "$lixeira_user" "$cache_user" "$config_user"
@@ -157,7 +173,7 @@ main_lista_arquivos() {
 user=$(whoami)
 path_atual=$(dirname $0)
 home_user="/home/$user"
-home_user_all=$(ls -A $home_user/ | egrep -v "Downloads|Documentos|Imagens|Vídeos|.cache|.config|.email_aluno")
+home_user_all=$(ls -A $home_user/ | grep -vE "Downloads|Documentos|Imagens|Vídeos|.cache|.cache/|.config|.email_aluno|.infoCotaUser")
 downloads_user="$home_user/Downloads/*"
 documentos_user="$home_user/Documentos/*"
 imagens_user="$home_user/Imagens/*"

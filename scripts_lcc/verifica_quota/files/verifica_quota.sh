@@ -11,8 +11,8 @@ get_percent() {
 		echo $limit_default > $file_user # caso o arquivo que contém as informações não seja encontrado, é criado um novo 
 	fi
 	
-	usado_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f2) # variável que armazena a quantidade de cota utilizada com a letra M ( megabytes )
-	total_m=$(quota -s | tail -1 | tr -s " " | cut -d " " -f3) # variável que armazena a quantidade de cota total do usuario com a letra M ( megabytes )
+	usado_m=$(quota -s -u $user | tail -1 | tr -s " " | cut -d " " -f2) # variável que armazena a quantidade de cota utilizada com a letra M ( megabytes )
+	total_m=$(quota -s -u $user | tail -1 | tr -s " " | cut -d " " -f3) # variável que armazena a quantidade de cota total do usuario com a letra M ( megabytes )
  	
  	lenght_usado=${#usado_m}
 	lenght_total=${#total_m}
@@ -35,8 +35,10 @@ get_percent() {
 	
 }
 
-# verifica se a cota usada do usuário ultrapassou o limite imposto
+
 check_quota_on_login() {
+	# verifica se a cota usada do usuário ultrapassou o limite imposto
+	
 	path_atual=$(dirname $0)
 	path_aviso_usuario="$path_atual/aviso_usuario.sh"
 	

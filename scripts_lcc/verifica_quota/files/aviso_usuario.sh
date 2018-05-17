@@ -25,17 +25,17 @@ verifica_status_aviso_usuario() {
 	
 	case $? in
 		
-		0) exit & main_lista_arquivos ;;
+		0) return 1 & main_lista_arquivos ;;
 		
-		1) exit ;;
+		1) exit 1;;
 		
-		2) exit & limpar_lixeira ;;
+		2) return 1 & limpar_lixeira ;;
 		
-		3) exit & apagar_cache ;;
+		3) return 1 & apagar_cache ;;
 		
-		4) exit & alterar_limite ;;
+		4) return 1 & alterar_limite ;;
 		
-		5) exit & reportar_bug ;;
+		5) return 1 & reportar_bug ;;
 
 	esac
 }
@@ -50,7 +50,7 @@ limpar_lixeira() {
 		--auto-close && zenity \
 		--info \
 		--title="Aviso" \
-		--text="Lixeira Limpa com Sucesso."; exit & main_aviso_usuario
+		--text="Lixeira Limpa com Sucesso."; return 1 & main_aviso_usuario
 }
 
 
@@ -69,9 +69,9 @@ apagar_cache() {
 		--auto-close && zenity \
 		--info \
 		--text="Cache Deletado com Sucesso." \
-		--title="Aviso"; exit & main_aviso_usuario ;;
+		--title="Aviso"; return 1 & main_aviso_usuario ;;
 		
-		1) exit & main_aviso_usuario ;;
+		1) return 1 & main_aviso_usuario ;;
 	
 	esac
 }
@@ -90,9 +90,9 @@ alterar_limite() {
 	
 	case $? in
 		
-		0) sed -i "1s/.*/$new_limit/" $file_user ; exit & main_aviso_usuario ;;
+		0) sed -i "1s/.*/$new_limit/" $file_user ; return 1 & main_aviso_usuario ;;
 		
-		1) exit & main_aviso_usuario ;;
+		1) return 1 & main_aviso_usuario ;;
 	
 	esac
 	
@@ -110,7 +110,7 @@ reportar_bug() {
 		
 		0) ;;
 		
-		1) exit & main_aviso_usuario ;;
+		1) return 1 & main_aviso_usuario ;;
 	
 	esac
 
