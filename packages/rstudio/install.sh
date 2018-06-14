@@ -33,4 +33,4 @@ wget --tries=3 --timeout=120 https://download1.rstudio.org/rstudio-xenial-1.1.38
 sudo dpkg -i rstudio-*-amd64.deb
 
 
-rm rstudio-1.0.143-amd64.deb
+rm rstudio-xenial-1.1.383-amd64.deb
