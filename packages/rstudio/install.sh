@@ -33,4 +33,6 @@ wget --tries=3 --timeout=120 https://download1.rstudio.org/rstudio-xenial-1.1.38
 sudo dpkg -i rstudio-*-amd64.deb
 
 
-rm rstudio-xenial-1.1.383-amd64.deb
+rm rstudio-xenial-1.1.383-amd64.deb]
+rm libgstreamer0.10-0_0.10.36-1.5_amd64.deb
+rm libgstreamer-plugins-base0.10-0_0.10.36-2_amd64.deb
