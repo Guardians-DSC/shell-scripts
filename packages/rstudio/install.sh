@@ -1,4 +1,4 @@
-
+i
 #!/bin/bash
 #################################################################################################
 #                                                                                                                                                                                       #
@@ -22,7 +22,7 @@ sudo dpkg -i libgstreamer0.10-0_0.10.36-1.5_amd64.deb
 sudo dpkg -i libgstreamer-plugins-base0.10-0_0.10.36-2_amd64.deb
 sudo apt-mark hold libgstreamer-plugins-base0.10-0
 sudo apt-mark hold libgstreamer0.10
-apt -f install -y
+apt -f -y install
 
 #Download RStudio for Ubuntu 16.04 to Ubuntu 17.10 64bits
 
