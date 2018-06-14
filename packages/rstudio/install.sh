@@ -22,7 +22,7 @@ sudo dpkg -i libgstreamer0.10-0_0.10.36-1.5_amd64.deb
 sudo dpkg -i libgstreamer-plugins-base0.10-0_0.10.36-2_amd64.deb
 sudo apt-mark hold libgstreamer-plugins-base0.10-0
 sudo apt-mark hold libgstreamer0.10
-apt -f install -Y
+apt -f install -y
 
 #Download RStudio for Ubuntu 16.04 to Ubuntu 17.10 64bits
 
@@ -33,6 +33,6 @@ wget --tries=3 --timeout=120 https://download1.rstudio.org/rstudio-xenial-1.1.38
 sudo dpkg -i rstudio-*-amd64.deb
 
 
-rm rstudio-xenial-1.1.383-amd64.deb]
-rm libgstreamer0.10-0_0.10.36-1.5_amd64.deb
-rm libgstreamer-plugins-base0.10-0_0.10.36-2_amd64.deb
+rm rstudio-xenial-1.1.383-amd64.deb*
+rm lib*
+
